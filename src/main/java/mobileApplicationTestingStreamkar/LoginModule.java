@@ -888,8 +888,8 @@ public class LoginModule {
 								  //List of elements 
 								  List<AndroidElement> inputFields = driver.findElements(By.className("android.widget.EditText"));
 								  
-								  //Username field data
-								  String passwordInformation = inputFields.get(01).getText();
+								  //Password field data
+								  String passwordInformation = inputFields.get(1).getText();
 								  
 								  System.out.println(passwordInformation);
 								  
@@ -1118,7 +1118,8 @@ public class LoginModule {
 								  wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.thankyo.hwgame:id/bSkip"))).click();
 								  
 								  //Instagram Button 
-								  driver.findElementByAndroidUIAutomator("new UiSelector().text(\"Log in with Instagram\")").click(); Thread.sleep(3000L);
+								  driver.findElementByAndroidUIAutomator("new UiSelector().text(\"Log in with Instagram\")").click(); 
+								  Thread.sleep(3000L);
 								  
 								  //List of elements 
 								  List<AndroidElement> userInformation = driver.findElements(By.className("android.widget.EditText"));

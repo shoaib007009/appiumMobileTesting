@@ -335,8 +335,8 @@ public class LiveBazeLoginModule {
 			  }//Livebaze login test completion	
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------			  
 			  
-			//Facebook login test.
-			 @Test 
+		    //Facebook login test.
+			@Test 
 			public void livebazeFacebookLogintest() throws InterruptedException, IOException {
 					
 				  //Reading Sheet From Workbook.
@@ -584,8 +584,282 @@ public class LiveBazeLoginModule {
 				} //Livebaze facebook login test completion
 				
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------				
-			  
-			  
+			  	
+			//Instagram login test.
+			@Test 
+			public void livebazeInstagramLogintest() throws InterruptedException, IOException {
+					
+				  //Reading Sheet From Workbook.
+					Sheet instagram = workbook.getSheet("instagram");
+
+				  for (Row row : instagram) { //Start of for each loop.
+					  
+					  	if (row.getRowNum() >= 1) { //First if condition.
+					  		
+					  		System.out.println("Info: Current Row Number: " + row.getRowNum());
+					  		
+					  		//Cell information stored in program.
+					  		Cell currentUsernameE  =  row.getCell(0); // First cell in the row.
+							Cell currentPasswordE  =  row.getCell(1); // Second cell in the row.
+							Cell currentNickNameE  =  row.getCell(2); // Third cell in the row.
+							Cell expectedResultE   =  row.getCell(3); // Forth cell in the row.
+							
+							//Check whether cell values are empty.
+							String currentUsername  =  currentUsernameE == null ? "" : currentUsernameE.toString(); 
+							String currentPassword  =  currentPasswordE == null ? "" : currentPasswordE.toString();
+							String currentNickName  =  currentNickNameE == null ? "" : currentNickNameE.toString(); 
+							String expectedResult   =  expectedResultE  == null ? "" : expectedResultE.toString();  
+							
+							//Row information printed to console.
+							System.out.println("User Information From Excel Sheet:");
+							System.out.println("Instagram User Name:   " + currentUsername);
+							System.out.println("Instagram Password:    " + currentPassword);
+							System.out.println("Instagram Nick Name:   " + currentNickName);
+							
+							
+									// Condition = Username: empty + Password: empty + Expected Result: Test Failed.
+									if (currentUsername.equals("") && currentPassword.equals("") && expectedResult.equals("Test Failed")) {
+										System.out.println("Test case Evaluation:");
+										System.out.println("Username: Blank"  );
+										System.out.println("Password: Blank"  );
+										System.out.println("Test case expected result: Test Failed");
+										System.out.println("Reason: No username and  password is provided so the user should not be able to login to the application.");
+									
+							//Appium code
+										//Android Driver Start Method
+										  driver = androidDriverStart();
+										  
+										//Web Driver Wait
+										  wait = webDriverWait(driver);
+										
+										//Live instagram login method- Not Successful
+										  liveBazeInstagramLoginNotSuccessful(driver, wait, currentUsername, currentPassword);
+										  
+										//List of elements 
+										  List<AndroidElement> inputFields = driver.findElements(By.className("android.widget.EditText"));
+										  
+										//Password field data
+										  String passwordInformation = inputFields.get(1).getText();
+										  
+										//Test Case Checking.
+										  assertEquals("Password:", passwordInformation);
+											  
+									    //Test completion notification.
+										  System.out.println("Info: Test Completed");
+											  
+									    //Updating excel cell with result
+										  System.out.println("Info: Updating excel sheet with result.");
+										  row.createCell(4).setCellValue("Test Failed");
+											 
+									    //File Writing Method
+										  writeResultToExcelSheet(outputStream, workbook);   
+										  
+										  
+									// Condition = Username: empty + Password: provided + Expected Result: Test Failed.	
+									} else if (currentUsername.equals("") && currentPassword.length() > 0 && expectedResult.equals("Test Failed")) {
+										
+										System.out.println("Test case Evaluation:");
+										System.out.println("Username: Blank"  );
+										System.out.println("Password: Provided"  );
+										System.out.println("Test case expected result: Test Failed");
+										System.out.println("Reason: Only password is provided so the user should not be able to login to the application.");
+											
+							//Appium code
+										//Android Driver Start Method
+										  driver = androidDriverStart();
+										  
+										//Web Driver Wait
+										  wait = webDriverWait(driver);
+										
+										//Live instagram login method- Not Successful
+										  liveBazeInstagramLoginNotSuccessful(driver, wait, currentUsername, currentPassword);
+										  
+										//List of elements 
+										  List<AndroidElement> inputFields = driver.findElements(By.className("android.widget.EditText"));
+										  
+										//Password field data
+										  String passwordInformation = inputFields.get(1).getText();
+										  
+										//Test Case Checking.
+										  assertEquals("Password:", passwordInformation);
+											  
+									    //Test completion notification.
+										  System.out.println("Info: Test Completed");
+											  
+									    //Updating excel cell with result
+										  System.out.println("Info: Updating excel sheet with result.");
+										  row.createCell(4).setCellValue("Test Failed");
+											 
+									    //File Writing Method
+										  writeResultToExcelSheet(outputStream, workbook);
+										 
+										
+									// Condition = Username: provided + Password: empty + Expected Result: Test Failed.	
+									} else if (currentUsername.length() > 0 && currentPassword.equals("") && expectedResult.equals("Test Failed")){
+										
+										System.out.println("Test case Evaluation:");
+										System.out.println("Username: Provided"  );
+										System.out.println("Password: Blank"  );
+										System.out.println("Test case expected result: Test Failed");
+										System.out.println("Reason: Only username is  provided so the user should not be able to login to the application.");
+										
+							//Appium code
+										//Android Driver Start Method
+										  driver = androidDriverStart();
+										  
+										//Web Driver Wait
+										  wait = webDriverWait(driver);
+										
+										//Live instagram login method- Not Successful
+										  liveBazeInstagramLoginNotSuccessful(driver, wait, currentUsername, currentPassword);
+										  
+										//List of elements 
+										  List<AndroidElement> inputFields = driver.findElements(By.className("android.widget.EditText"));
+										  
+										//Password field data
+										  String passwordInformation = inputFields.get(1).getText();
+										  
+										//Test Case Checking.
+										  assertEquals("Password:", passwordInformation);
+											  
+									    //Test completion notification.
+										  System.out.println("Info: Test Completed");
+											  
+									    //Updating excel cell with result
+										  System.out.println("Info: Updating excel sheet with result.");
+										  row.createCell(4).setCellValue("Test Failed");
+											 
+									    //File Writing Method
+										  writeResultToExcelSheet(outputStream, workbook);
+										  
+										
+									// Condition = Username: provided + Password: provided + Expected Result: Test Failed.	
+									} else if (currentUsername.length() > 0 && currentPassword.length() > 0 && expectedResult.equals("Test Failed")){
+										
+										System.out.println("Test case Evaluation:");
+										System.out.println("Username: Provided"  );
+										System.out.println("Password: Provided"  );
+										System.out.println("Test case expected result: Test Failed");
+										System.out.println("Reason: The username and/or password is not correct so the user should not be able to login to the application.");
+										
+							//Appium code
+										//Android Driver Start Method
+										  driver = androidDriverStart();
+										  
+										//Web Driver Wait
+										  wait = webDriverWait(driver);
+										
+										//Live instagram login method- Not Successful
+										  liveBazeInstagramLoginNotSuccessful(driver, wait, currentUsername, currentPassword);
+										  
+										//List of elements 
+										  List<AndroidElement> inputFields = driver.findElements(By.className("android.widget.EditText"));
+										  
+										//Password field data
+										  String passwordInformation = inputFields.get(1).getText();
+										  
+										//Test Case Checking.
+										  assertEquals("Password:", passwordInformation);
+											  
+									    //Test completion notification.
+										  System.out.println("Info: Test Completed");
+											  
+									    //Updating excel cell with result
+										  System.out.println("Info: Updating excel sheet with result.");
+										  row.createCell(4).setCellValue("Test Failed");
+											 
+									    //File Writing Method
+										  writeResultToExcelSheet(outputStream, workbook);
+										  
+										
+									
+									// Condition = Username: provided + Password: provided + Expected Result: Test Passed + Logout: True.		
+									} else if (currentUsername.length() > 0 && currentPassword.length() > 0 && expectedResult.equals("Test Passed")){
+										
+										System.out.println("Test case Evaluation:");
+										System.out.println("Username: Provided"  );
+										System.out.println("Password: Provided"  );
+										System.out.println("Test case expected result: Test Passed");
+										System.out.println("Reason: Username and  password provided is correct so the user should be able to login to the application.");
+										
+							//Appium code
+										 //Android Driver Start Method
+										  driver = androidDriverStart();
+										  
+										 //Web Driver Wait
+										  wait = webDriverWait(driver);
+										  
+										 //Livebaze Facebook Login Method
+										  liveBazeInstagramLoginSuccessful(driver, wait, currentUsername, currentPassword);
+										    
+										 //Getting Username 
+										  String externalNickname = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.melot.thankyo:id/me_tv_login_name_new"))).getText();  
+										  
+										 //Test Case Checking.
+										  assertEquals(currentNickName, externalNickname);
+											  
+									     //Test completion notification.
+										  System.out.println("Info: Test Completed");
+											  
+									     //Updating excel cell with result
+										  System.out.println("Info: Updating excel sheet with result.");
+										  row.createCell(4).setCellValue("Test Failed");
+											 
+									     //File Writing Method
+										  writeResultToExcelSheet(outputStream, workbook); 
+
+										
+									}
+									
+									else {
+										
+										System.out.println("There was an exception. Please check your " + "\"Test Case Nature\"" + " in excel sheet.");
+										System.out.println("Info: Writing result to excel sheet.");
+										row.createCell(4).setCellValue("Check Test case");
+									} // End of second if condition.
+						
+							
+							
+						} else {
+
+									System.out.println("Facebook: Header Row Skipped ...");
+							
+						} //End of first if condition.
+					  
+					
+				      } //End of for each loop.
+				  
+				  
+				} //Livebaze instagram login test completion
+			
+			
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------		
+	
+			
+
+	//--------------------------------------------------------------------------------------> Methods		
+		
+	//Appium Driver		
+				
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------				
+			  		 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 			  
 			  
 			  	  
@@ -599,11 +873,16 @@ public class LiveBazeLoginModule {
 		  return new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities); 
 	}
 	
+	//Web Driver Wait
+	
 	//Web Driver Wait Method
 	public WebDriverWait webDriverWait(AndroidDriver<AndroidElement> driver){
 		
 		return new WebDriverWait(driver, 120);
 	}
+	
+	
+	//Livebaze Login Successful Method
 	
 	//Livebaze Login Method
 	public void liveBazeLogin(AndroidDriver<AndroidElement> driver, WebDriverWait wait, String currentUsername, String currentPassword) throws MalformedURLException{
@@ -624,6 +903,8 @@ public class LiveBazeLoginModule {
 	}
 	 
 	//Livebaze Facebook Login Method-Successful
+	
+	//Livebaze Facebook Login Successful Method
 	public void liveBazeFacebookLoginSuccessful(AndroidDriver<AndroidElement> driver, WebDriverWait wait, String currentUsername, String currentPassword) throws MalformedURLException, InterruptedException{
 		
   		//Profile icon
@@ -661,6 +942,8 @@ public class LiveBazeLoginModule {
 	}
 	
 	//Livebaze Facebook Login Method-Not Successful
+	
+	//Livebaze Facebook Login Not Successful Method
 	public void liveBazeFacebookLoginNotSuccessful(AndroidDriver<AndroidElement> driver, WebDriverWait wait, String currentUsername, String currentPassword) throws MalformedURLException, InterruptedException{
 			
 	  		//Profile icon
@@ -695,8 +978,86 @@ public class LiveBazeLoginModule {
 			
 		}
 	
+	//Livebaze Instagram Login Method-Successful
 	
+	//Livebaze Instagram Login Successful Method
+	public void liveBazeInstagramLoginSuccessful(AndroidDriver<AndroidElement> driver, WebDriverWait wait, String currentUsername, String currentPassword) throws MalformedURLException, InterruptedException{
+			
+	  		//Profile icon
+	  		  wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.melot.thankyo:id/footer_profile_iv"))).click();
+	  		//Sign in button
+	  		  wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.melot.thankyo:id/me_tv_signin"))).click();
+	  		//Instagram Button
+	  		  List<WebElement> socialLoginButtons = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("android.widget.ImageView")));
+	  		  socialLoginButtons.get(5).click();
+	  		//Loop through all input fields 
+			  List<WebElement> loginFields = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("android.widget.EditText")));  
+	  		//Username
+	  		  loginFields.get(0).sendKeys(currentUsername);
+	  		//Tapping Back Button 
+	  		  driver.pressKeyCode(AndroidKeyCode.BACK);
+	  		//Wait
+	  		  Thread.sleep(1000L);
+	  		//Password
+	  		  loginFields.get(1).sendKeys(currentPassword);
+	  	    //Tapping Back Button 
+			  driver.pressKeyCode(AndroidKeyCode.BACK);
+			//Wait after the values have been entered
+			  Thread.sleep(1000L);
+			//Clicking the Login button 
+			  wait.until(ExpectedConditions.presenceOfElementLocated(By.className("android.widget.Button"))).click();
+			//Wait for the login process to finish
+			  Thread.sleep(6000L);
+			//Authorize Button 
+			  try {
+				  List<AndroidElement> authorizeButton =
+				  driver.findElements(By.className("android.widget.Button"));
+				  authorizeButton.get(1).click();
+				  System.out.println("Info: Authorized button clicked successfully.");
+				//To ensure the user is logged in 
+				  Thread.sleep(5000L); 
+				  
+				  } catch (Exception e) {
+				  System.out.println("Info: Authorize button not found."); 
+				  
+				  }
+			
+		}
+	
+	//Livebaze Instagram Login Not Successful Method
+	public void liveBazeInstagramLoginNotSuccessful(AndroidDriver<AndroidElement> driver, WebDriverWait wait, String currentUsername, String currentPassword) throws MalformedURLException, InterruptedException{
+				
+			//Profile icon
+	  		  wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.melot.thankyo:id/footer_profile_iv"))).click();
+	  		//Sign in button
+	  		  wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.melot.thankyo:id/me_tv_signin"))).click();
+	  		//Instagram Button
+	  		  List<WebElement> socialLoginButtons = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("android.widget.ImageView")));
+	  		  socialLoginButtons.get(5).click();
+	  		//Loop through all input fields 
+			  List<WebElement> loginFields = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("android.widget.EditText")));  
+	  		//Username
+	  		  loginFields.get(0).sendKeys(currentUsername);
+	  		//Tapping Back Button 
+	  		  driver.pressKeyCode(AndroidKeyCode.BACK);
+	  		//Wait
+	  		  Thread.sleep(1000L);
+	  		//Password
+	  		  loginFields.get(1).sendKeys(currentPassword);
+	  	    //Tapping Back Button 
+			  driver.pressKeyCode(AndroidKeyCode.BACK);
+			//Wait after the values have been entered
+			  Thread.sleep(1000L);
+			//Clicking the Login button 
+			  wait.until(ExpectedConditions.presenceOfElementLocated(By.className("android.widget.Button"))).click();
+			//Wait for the login process to finish
+			  Thread.sleep(3000L);
+				
+			}
+
 	//File Writing Method
+	
+	//Update Results To Excel Sheet Method
 	public void writeResultToExcelSheet(FileOutputStream outputStream, Workbook workbook) throws IOException{
 		 
 		  //Creating output stream for excel file
